@@ -1,0 +1,38 @@
+Step-by-step explanation
+Workflow name
+
+name: CI Workflow
+This is just the display name you’ll see in GitHub → Actions.
+
+When it runs (triggers)
+
+on.push.branches: [main] → runs every time you push to main.
+
+on.pull_request.branches: [main] → runs for PRs targeting main.
+
+Jobs & runner
+
+jobs.test.runs-on: ubuntu-latest
+Defines a single job called test, executed on a fresh Ubuntu VM.
+
+Checkout repository
+
+uses: actions/checkout@v2
+Pulls your repo’s code into the runner so the next steps can access it.
+
+Set up Python
+
+uses: actions/setup-python@v2 with python-version: '3.9'
+Installs Python 3.9 on the runner and makes it available in $PATH.
+
+Install dependencies
+
+Upgrades pip, then installs pytest and streamlit.
+(You can switch to pip install -r requirements.txt if you keep deps there.)
+
+Run tests
+
+Currently you have:
+pytest _test.py explain step by step
+That will fail because explain and step will be treated as extra paths.
+✅ Fix: Use just pytest _test.py (or pytest -q _test.py for quieter output)
